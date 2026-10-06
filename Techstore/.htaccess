@@ -1,0 +1,37 @@
+# =========================================================
+# TechStore — configuración del servidor
+# Sube este archivo junto con index.html (se llama ".htaccess",
+# con el punto al principio y sin extensión).
+# Sirve en hosting con Apache / cPanel. Si tu hosting usa otra
+# cosa (Netlify, Vercel, nginx) simplemente lo ignora.
+# =========================================================
+
+# ---- Acentos correctos (que no salga "opciÃ³n") ----
+AddDefaultCharset UTF-8
+<IfModule mod_mime.c>
+  AddType application/javascript .js
+  AddType text/css .css
+  AddCharset UTF-8 .html .css .js
+</IfModule>
+
+# ---- Nunca guardar en caché la página ni el catálogo ----
+# Así, en cuanto subas un products.js nuevo, los clientes lo ven
+# de inmediato en lugar de seguir viendo el catálogo viejo.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|js|css)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+
+  # Las fotos sí se guardan en caché: no cambian y así carga más rápido
+  <FilesMatch "\.(jpg|jpeg|png|webp|gif|svg|ico)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+</IfModule>
+
+# ---- Comprimir para que cargue más rápido ----
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript text/plain
+</IfModule>
+

@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>TechStore · Celulares, consolas y gaming</title>
+  <meta name="description" content="TechStore: celulares, consolas, videojuegos y periféricos gamer. Compra por WhatsApp y paga por transferencia SPEI o tarjeta de débito/crédito." />
+  <meta name="theme-color" content="#07080c" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2307080c'/%3E%3Cpath d='M18 4 8 18h7l-2 10 11-15h-7z' fill='%234f6bff'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="is-loading">
+  <!-- Pantalla de carga -->
+  <div class="loader" id="loader" role="status" aria-live="polite" aria-label="Cargando TechStore">
+    <div class="loader__glow" aria-hidden="true"></div>
+    <div class="loader__inner">
+      <div class="loader__mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path class="loader__bolt" d="M13.5 2 5 13.5h6L9.5 22 19 9.5h-6z"/></svg>
+      </div>
+      <div class="loader__word" aria-hidden="true"><span>T</span><span>e</span><span>c</span><span>h</span><span class="loader__accent">S</span><span class="loader__accent">t</span><span class="loader__accent">o</span><span class="loader__accent">r</span><span class="loader__accent">e</span></div>
+      <div class="loader__bar"><span id="loaderBar"></span></div>
+      <p class="loader__pct"><span id="loaderPct">0</span>%</p>
+    </div>
+  </div>
+
+  <!-- Barra de anuncios -->
+  <div class="topbar" role="note">
+    <div class="topbar__track">
+      <span><i data-i="truck"></i>Envíos a todo México</span>
+      <span><i data-i="bank"></i>Transferencia SPEI</span>
+      <span><i data-i="card"></i>Tarjeta de débito y crédito</span>
+      <span><i data-i="shield"></i>Garantía en todos los productos</span>
+      <span><i data-i="whatsapp"></i>Atención directa por WhatsApp</span>
+      <span aria-hidden="true"><i data-i="truck"></i>Envíos a todo México</span>
+      <span aria-hidden="true"><i data-i="bank"></i>Transferencia SPEI</span>
+      <span aria-hidden="true"><i data-i="card"></i>Tarjeta de débito y crédito</span>
+      <span aria-hidden="true"><i data-i="shield"></i>Garantía en todos los productos</span>
+      <span aria-hidden="true"><i data-i="whatsapp"></i>Atención directa por WhatsApp</span>
+    </div>
+  </div>
+
+  <!-- Encabezado -->
+  <header class="header" id="header">
+    <div class="wrap header__row">
+      <a href="#inicio" class="logo" aria-label="TechStore inicio">
+        <span class="logo__mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2 5 13.5h6L9.5 22 19 9.5h-6z"/></svg></span>
+        <span class="logo__word">Tech<b>Store</b></span>
+      </a>
+      <nav class="nav" aria-label="Categorías">
+        <a href="#catalogo" data-go="celulares">Celulares</a>
+        <a href="#catalogo" data-go="consolas">Consolas</a>
+        <a href="#catalogo" data-go="retro">Retro</a>
+        <a href="#catalogo" data-go="mouse">Mouse</a>
+        <a href="#catalogo" data-go="teclados">Teclados</a>
+        <a href="#catalogo" data-go="audio">Audífonos</a>
+      </nav>
+      <div class="header__actions">
+        <button class="icon-btn" id="searchOpen" aria-label="Buscar"><i data-i="search"></i></button>
+        <button class="icon-btn cart-btn" id="cartOpen" aria-label="Abrir carrito">
+          <i data-i="bag"></i><span class="cart-btn__count" id="cartCount">0</span>
+        </button>
+        <button class="icon-btn menu-btn" id="menuOpen" aria-label="Menú"><i data-i="menu"></i></button>
+      </div>
+    </div>
+    <div class="searchbar" id="searchbar">
+      <div class="wrap searchbar__inner">
+        <i data-i="search"></i>
+        <input type="search" id="searchInput" placeholder="Busca iPhone, PS5, teclado mecánico, audífonos…" autocomplete="off" />
+        <button class="icon-btn" id="searchClose" aria-label="Cerrar búsqueda"><i data-i="x"></i></button>
+      </div>
+      <div class="wrap"><div class="search-results" id="searchResults"></div></div>
+    </div>
+  </header>
+
+  <!-- Menú móvil -->
+  <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <div class="mobile-nav__panel">
+      <div class="mobile-nav__head">
+        <span class="logo__word">Tech<b>Store</b></span>
+        <button class="icon-btn" data-close-mobile aria-label="Cerrar menú"><i data-i="x"></i></button>
+      </div>
+      <div class="mobile-nav__links" id="mobileLinks"></div>
+    </div>
+  </div>
+
+  <main id="inicio">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero__bg" aria-hidden="true">
+        <span class="orb orb--a"></span><span class="orb orb--b"></span><span class="orb orb--c"></span>
+        <span class="grid-lines"></span>
+        <span class="hero__spot"></span>
+      </div>
+      <div class="wrap hero__inner">
+        <div class="hero__copy">
+          <span class="eyebrow eyebrow--dark"><span class="pulse"></span>Nueva temporada · Nintendo Switch 2 disponible</span>
+          <h1 class="hero__title" aria-label="Tecnología que se siente distinta.">Tecnología que<br /><span class="typed" aria-hidden="true"><span class="grad-text" id="typed">se siente distinta.</span><span class="typed__caret"></span></span></h1>
+          <p class="hero__lead">Celulares, consolas, videojuegos y equipo gamer de las mejores marcas. Elige, envíanos tu pedido por WhatsApp y paga por transferencia SPEI o con tarjeta.</p>
+          <div class="hero__cta">
+            <a href="#catalogo" class="btn btn--light btn--lg">Ver catálogo <i data-i="arrowRight"></i></a>
+            <a href="#como-comprar" class="btn btn--ghost-dark btn--lg"><i data-i="whatsapp"></i>Cómo comprar</a>
+          </div>
+        </div>
+        <div class="hero__stage" id="heroStage" aria-label="Productos destacados">
+          <!-- generado por app.js -->
+        </div>
+      </div>
+      <div class="brands-strip" aria-label="Marcas">
+        <div class="brands-strip__track" id="brandsTrack"></div>
+      </div>
+    </section>
+
+    <!-- Categorías -->
+    <section class="section" id="categorias">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <div>
+            <span class="eyebrow">Explora</span>
+            <h2 class="section__title">Compra por categoría</h2>
+          </div>
+        </div>
+        <div class="cats" id="catsGrid"></div>
+      </div>
+    </section>
+
+    <!-- Destacados -->
+    <section class="section section--tight">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <div>
+            <span class="eyebrow">Lo más buscado</span>
+            <h2 class="section__title">Ofertas destacadas</h2>
+          </div>
+          <div class="rail-ctrl">
+            <button class="icon-btn icon-btn--outline" data-rail="prev" aria-label="Anterior"><i data-i="chevronLeft"></i></button>
+            <button class="icon-btn icon-btn--outline" data-rail="next" aria-label="Siguiente"><i data-i="chevronRight"></i></button>
+          </div>
+        </div>
+        <div class="rail" id="dealsRail"></div>
+      </div>
+    </section>
+
+    <!-- Banner celulares -->
+    <section class="section section--tight">
+      <div class="wrap">
+        <div class="promo reveal" id="promoPhones">
+          <div class="promo__copy">
+            <span class="eyebrow eyebrow--dark">Celulares</span>
+            <h2>iPhone y Samsung Galaxy en todas sus versiones.</h2>
+            <p>Elige estado, capacidad y color. Cada variante muestra su precio y su foto real antes de agregarla al carrito.</p>
+            <a href="#catalogo" class="btn btn--light" data-go="celulares">Ver celulares <i data-i="arrowRight"></i></a>
+          </div>
+          <div class="promo__visual" id="promoVisual"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Catálogo -->
+    <section class="section" id="catalogo">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <div>
+            <span class="eyebrow">Catálogo</span>
+            <h2 class="section__title">Todos los productos</h2>
+          </div>
+          <p class="section__note" id="resultCount"></p>
+        </div>
+
+        <div class="toolbar reveal">
+          <div class="chips" id="catChips" role="tablist" aria-label="Filtrar por categoría"></div>
+          <div class="toolbar__right">
+            <label class="select">
+              <span class="sr-only">Marca</span>
+              <select id="brandSelect"><option value="">Todas las marcas</option></select>
+              <i data-i="chevronDown"></i>
+            </label>
+            <label class="select">
+              <span class="sr-only">Ordenar</span>
+              <select id="sortSelect">
+                <option value="featured">Destacados</option>
+                <option value="price-asc">Precio: menor a mayor</option>
+                <option value="price-desc">Precio: mayor a menor</option>
+                <option value="discount">Mayor descuento</option>
+                <option value="name">Nombre A–Z</option>
+              </select>
+              <i data-i="chevronDown"></i>
+            </label>
+          </div>
+        </div>
+
+        <div class="grid" id="productGrid"></div>
+        <div class="load-more-wrap"><button class="btn btn--outline btn--lg load-more" id="loadMore" hidden></button></div>
+        <div class="empty" id="emptyState" hidden>
+          <i data-i="search"></i>
+          <p>No encontramos productos con esos filtros.</p>
+          <button class="btn btn--dark" id="resetFilters">Limpiar filtros</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cómo comprar -->
+    <section class="section section--dark" id="como-comprar">
+      <div class="wrap">
+        <div class="section__head section__head--center reveal">
+          <div>
+            <span class="eyebrow eyebrow--dark">Compra en 3 pasos</span>
+            <h2 class="section__title">Tu pedido se cierra por WhatsApp</h2>
+            <p class="section__lead">Sin registros ni formularios largos. Hablas directo con un asesor que confirma existencias, envío y pago.</p>
+          </div>
+        </div>
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step__num">01</span>
+            <span class="step__icon"><i data-i="bag"></i></span>
+            <h3>Arma tu carrito</h3>
+            <p>Elige productos y variantes. Ajusta cantidades: el total se calcula al momento.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num">02</span>
+            <span class="step__icon"><i data-i="whatsapp"></i></span>
+            <h3>Envía tu pedido</h3>
+            <p>Con un clic se abre WhatsApp con tu pedido completo: productos, cantidades y total.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num">03</span>
+            <span class="step__icon"><i data-i="card"></i></span>
+            <h3>Paga como prefieras</h3>
+            <p>Transferencia SPEI o tarjeta de débito/crédito. El asesor te comparte los datos de pago.</p>
+          </li>
+        </ol>
+        <div class="pay-methods reveal">
+          <div class="pay-method"><i data-i="bank"></i><div><strong>Transferencia SPEI</strong><span>Desde la app de tu banco</span></div></div>
+          <div class="pay-method"><i data-i="card"></i><div><strong>Tarjeta de débito o crédito</strong><span>Se hará directo con el establecimiento</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Beneficios -->
+    <section class="section section--tight">
+      <div class="wrap perks">
+        <div class="perk reveal"><i data-i="shield"></i><div><h3>Garantía incluida</h3><p>Todos los productos cuentan con garantía. Te acompañamos en cualquier aclaración.</p></div></div>
+        <div class="perk reveal"><i data-i="truck"></i><div><h3>Envíos nacionales</h3><p>Enviamos a todo México con guía de rastreo. El costo se confirma por WhatsApp.</p></div></div>
+        <div class="perk reveal"><i data-i="lock"></i><div><h3>Pago seguro</h3><p>Pagas solo después de confirmar existencias y total con tu asesor.</p></div></div>
+        <div class="perk reveal"><i data-i="headset"></i><div><h3>Asesoría real</h3><p>¿Dudas entre dos modelos? Pregúntanos y te ayudamos a elegir.</p></div></div>
+      </div>
+    </section>
+
+    <!-- Reseñas -->
+    <section class="section reviews" id="resenas">
+      <div class="wrap">
+        <div class="section__head section__head--center reveal">
+          <div>
+            <span class="eyebrow">Reseñas</span>
+            <h2 class="section__title">Lo que dicen nuestros clientes</h2>
+            <div class="rating-sum">
+              <span class="stars" id="avgStars"></span>
+              <strong id="avgRating"></strong>
+              <span id="reviewCount"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="marquee" aria-label="Reseñas de clientes">
+        <div class="marquee__track" id="reviewsA"></div>
+      </div>
+      <div class="marquee marquee--reverse" aria-hidden="true">
+        <div class="marquee__track" id="reviewsB"></div>
+      </div>
+    </section>
+
+    <!-- Políticas -->
+    <section class="section section--tight" id="politicas">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <div>
+            <span class="eyebrow">Compra con confianza</span>
+            <h2 class="section__title">Políticas de la tienda</h2>
+          </div>
+        </div>
+        <div class="policies" id="policiesGrid"></div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="wrap faq-wrap">
+        <div class="reveal">
+          <span class="eyebrow">Preguntas frecuentes</span>
+          <h2 class="section__title">Todo claro antes de comprar</h2>
+          <p class="section__lead section__lead--light">¿No encuentras tu respuesta? Escríbenos y te contestamos en minutos.</p>
+          <a class="btn btn--wa" id="faqWa" href="#" target="_blank" rel="noopener"><i data-i="whatsapp"></i>Escribir por WhatsApp</a>
+        </div>
+        <div class="faq reveal">
+          <details>
+            <summary>¿Cómo hago mi pedido?<i data-i="plus"></i></summary>
+            <p>Agrega productos al carrito (o usa "Comprar ahora") y presiona "Enviar pedido por WhatsApp". Se abrirá un chat con todo tu pedido listo para enviar.</p>
+          </details>
+          <details>
+            <summary>¿Qué formas de pago aceptan?<i data-i="plus"></i></summary>
+            <p>Transferencia SPEI y tarjeta de débito o crédito. Al confirmar tu pedido, el asesor te comparte los datos o el enlace de pago correspondiente.</p>
+          </details>
+          <details>
+            <summary>¿Qué significa "Semi nuevo" en celulares?<i data-i="plus"></i></summary>
+            <p>Son equipos revisados y funcionales en excelente estado estético. Cada variante indica su estado, capacidad y color antes de agregarla al carrito.</p>
+          </details>
+          <details>
+            <summary>¿Hacen envíos a todo el país?<i data-i="plus"></i></summary>
+            <p>Sí. Enviamos a todo México con número de guía. El costo y tiempo de entrega dependen de tu código postal y se confirman por WhatsApp.</p>
+          </details>
+          <details>
+            <summary>¿Los precios incluyen IVA?<i data-i="plus"></i></summary>
+            <p>Sí, todos los precios mostrados están en pesos mexicanos (MXN) con IVA incluido.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__grid">
+      <div>
+        <a href="#inicio" class="logo logo--light">
+          <span class="logo__mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2 5 13.5h6L9.5 22 19 9.5h-6z"/></svg></span>
+          <span class="logo__word">Tech<b>Store</b></span>
+        </a>
+        <p class="footer__about">Celulares, consolas, videojuegos y periféricos gamer. Atención personalizada y pagos por SPEI o tarjeta.</p>
+      </div>
+      <div>
+        <h4>Categorías</h4>
+        <ul id="footerCats"></ul>
+      </div>
+      <div>
+        <h4>Ayuda</h4>
+        <ul>
+          <li><a href="#como-comprar">Cómo comprar</a></li>
+          <li><a href="#faq">Preguntas frecuentes</a></li>
+          <li><a href="#" id="footerWa" target="_blank" rel="noopener">Contacto por WhatsApp</a></li>
+        </ul>
+        <h4 class="footer__sub">Políticas</h4>
+        <ul id="footerPolicies"></ul>
+      </div>
+      <div>
+        <h4>Pagos</h4>
+        <ul class="footer__pay">
+          <li><i data-i="bank"></i>Transferencia SPEI</li>
+          <li><i data-i="card"></i>Débito</li>
+          <li><i data-i="cardStack"></i>Crédito</li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap footer__bottom">
+      <span>© <span id="year"></span> TechStore. Todos los derechos reservados.</span>
+      <span>Precios en MXN con IVA incluido. Imágenes ilustrativas.</span>
+    </div>
+  </footer>
+
+  <!-- WhatsApp flotante -->
+  <a class="wa-float" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><i data-i="whatsapp"></i></a>
+
+  <!-- Overlay compartido -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Modal de producto -->
+  <div class="modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="pmTitle" aria-hidden="true">
+    <div class="modal__box modal__box--product">
+      <button class="icon-btn modal__close" data-close aria-label="Cerrar"><i data-i="x"></i></button>
+      <div class="pm" id="pmBody"></div>
+    </div>
+  </div>
+
+  <!-- Modal de políticas -->
+  <div class="modal" id="policyModal" role="dialog" aria-modal="true" aria-labelledby="polTitle" aria-hidden="true">
+    <div class="modal__box modal__box--policy">
+      <button class="icon-btn modal__close" data-close aria-label="Cerrar"><i data-i="x"></i></button>
+      <div class="pol">
+        <nav class="pol__nav" id="polNav" aria-label="Políticas"></nav>
+        <article class="pol__body" id="polBody"></article>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carrito -->
+  <aside class="drawer" id="cartDrawer" aria-hidden="true" aria-labelledby="cartTitle">
+    <div class="drawer__head">
+      <h3 id="cartTitle">Tu carrito <span id="cartHeadCount"></span></h3>
+      <button class="icon-btn" data-close aria-label="Cerrar carrito"><i data-i="x"></i></button>
+    </div>
+    <div class="drawer__body" id="cartBody"></div>
+    <div class="drawer__foot" id="cartFoot">
+      <div class="sum-row"><span>Artículos</span><span id="cartUnits">0</span></div>
+      <div class="sum-row"><span>Ahorro</span><span id="cartSavings" class="text-ok">$0</span></div>
+      <div class="sum-row sum-row--total"><span>Total</span><span id="cartTotal">$0</span></div>
+      <p class="drawer__note"><i data-i="info"></i>El costo de envío se confirma por WhatsApp.</p>
+      <button class="btn btn--wa btn--block btn--lg" id="cartCheckout"><i data-i="whatsapp"></i>Enviar pedido por WhatsApp</button>
+      <button class="link-btn" id="cartClear">Vaciar carrito</button>
+    </div>
+  </aside>
+
+  <!-- Checkout -->
+  <div class="modal" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="coTitle" aria-hidden="true">
+    <div class="modal__box modal__box--checkout">
+      <button class="icon-btn modal__close" data-close aria-label="Cerrar"><i data-i="x"></i></button>
+      <form class="co" id="coForm" novalidate>
+        <div class="co__head">
+          <span class="co__badge"><i data-i="whatsapp"></i></span>
+          <div>
+            <h3 id="coTitle">Confirmar pedido</h3>
+            <p>Revisa tu pedido. Se enviará a nuestro WhatsApp para coordinar pago y entrega.</p>
+          </div>
+        </div>
+        <div class="co__items" id="coItems"></div>
+        <div class="co__totals" id="coTotals"></div>
+
+        <fieldset class="co__group">
+          <legend>Método de pago</legend>
+          <div class="pay-opts">
+            <label class="pay-opt">
+              <input type="radio" name="pay" value="Transferencia SPEI" checked />
+              <span class="pay-opt__box"><i data-i="bank"></i><strong>Transferencia SPEI</strong><small>Te enviamos la CLABE</small></span>
+            </label>
+            <label class="pay-opt">
+              <input type="radio" name="pay" value="Tarjeta de débito o crédito (directo con el establecimiento)" />
+              <span class="pay-opt__box"><i data-i="card"></i><strong>Tarjeta de débito o crédito</strong><small>Directo con el establecimiento</small></span>
+            </label>
+          </div>
+          <p class="pay-note" id="debitNote" hidden><i data-i="info"></i>El pago con tarjeta de débito o crédito se hará directo con el establecimiento.</p>
+        </fieldset>
+
+        <div class="co__fields">
+          <label class="field">
+            <span>Nombre completo</span>
+            <input type="text" id="coName" autocomplete="name" placeholder="¿A nombre de quién?" required />
+          </label>
+          <label class="field">
+            <span>Teléfono / WhatsApp</span>
+            <input type="tel" id="coPhone" autocomplete="tel" inputmode="tel" maxlength="16" placeholder="10 dígitos" required />
+          </label>
+          <p class="co__subtitle field--full">Dirección de envío</p>
+          <label class="field field--full">
+            <span>Calle</span>
+            <input type="text" id="coStreet" autocomplete="address-line1" placeholder="Ej. Av. Juárez" required />
+          </label>
+          <label class="field">
+            <span>Número</span>
+            <input type="text" id="coNumber" placeholder="Ext. 123, Int. 4" required />
+          </label>
+          <label class="field">
+            <span>Código postal</span>
+            <input type="text" id="coZip" autocomplete="postal-code" inputmode="numeric" maxlength="5" placeholder="5 dígitos" required />
+          </label>
+          <label class="field">
+            <span>Colonia</span>
+            <input type="text" id="coColonia" autocomplete="address-level3" placeholder="Ej. Centro" required />
+          </label>
+          <label class="field">
+            <span>Ciudad y estado</span>
+            <input type="text" id="coCity" autocomplete="address-level2" placeholder="Ej. Guadalajara, Jalisco" required />
+          </label>
+          <label class="field field--full">
+            <span>Referencias de la vivienda</span>
+            <textarea id="coRef2" rows="2" placeholder="Ej. Casa blanca de dos pisos, portón negro, entre calle Hidalgo y Morelos" required></textarea>
+          </label>
+          <label class="field field--full">
+            <span>Notas <em>(opcional)</em></span>
+            <textarea id="coNotes" rows="2" placeholder="Ej. ¿Incluye cargador? / Horario para recibir"></textarea>
+          </label>
+        </div>
+        <p class="co__error" id="coError" role="alert"></p>
+        <button type="submit" class="btn btn--wa btn--block btn--lg"><i data-i="whatsapp"></i>Enviar pedido · <span id="coBtnTotal"></span></button>
+        <p class="co__legal"><i data-i="lock"></i>No pedimos datos de tarjeta en esta página. El pago se coordina directamente con tu asesor.</p>
+      </form>
+      <div class="co-done" id="coDone" hidden>
+        <span class="co-done__icon"><i data-i="check"></i></span>
+        <h3>Pedido listo en WhatsApp</h3>
+        <p>Si no se abrió el chat, presiona el botón. Un asesor confirmará existencias y te compartirá los datos de pago.</p>
+        <p class="co-done__ref" id="coRef"></p>
+        <a class="btn btn--wa btn--block" id="coReopen" href="#" target="_blank" rel="noopener"><i data-i="whatsapp"></i>Abrir WhatsApp de nuevo</a>
+        <button class="btn btn--outline btn--block" id="coClearCart">Vaciar carrito y seguir comprando</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <script src="products.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
